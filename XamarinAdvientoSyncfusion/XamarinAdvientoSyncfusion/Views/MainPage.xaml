@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="XamarinAdvientoSyncfusion.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:autocomplete="clr-namespace:Syncfusion.SfAutoComplete.XForms;assembly=Syncfusion.SfAutoComplete.XForms"
+    xmlns:avatarView="clr-namespace:Syncfusion.XForms.AvatarView;assembly=Syncfusion.Core.XForms"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:popupLayout="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
+    xmlns:textInputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+    Title="Mi perfil">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding GuardarPerfilCommand}" Text="Guardar" />
+    </ContentPage.ToolbarItems>
+    <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <StackLayout
+            Padding="20"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
+            <avatarView:SfAvatarView
+                Margin="0,15,0,0"
+                ContentType="Custom"
+                CornerRadius="150"
+                HeightRequest="250"
+                HorizontalOptions="Center"
+                ImageSource="stock.jpg"
+                VerticalOptions="Center"
+                WidthRequest="250" />
+            <textInputLayout:SfTextInputLayout
+                ContainerType="None"
+                ErrorText="{Binding Usuario.MensajeErrorUsuario}"
+                HasError="{Binding Usuario.ErrorUsuario}"
+                HelperText="Captura tu(s) nombre(s)"
+                Hint="Nombre(s)"
+                ReserveSpaceForAssistiveLabels="True">
+                <Entry Text="{Binding Usuario.Nombre, Mode=TwoWay}" />
+            </textInputLayout:SfTextInputLayout>
+            <textInputLayout:SfTextInputLayout
+                ContainerType="None"
+                ErrorText="{Binding Usuario.MensajeErrorApellidos}"
+                HasError="{Binding Usuario.ErrorApellidos}"
+                HelperText="Captura tus apellidos"
+                Hint="Apellido(s)"
+                ReserveSpaceForAssistiveLabels="True">
+                <Entry Text="{Binding Usuario.Apellidos, Mode=TwoWay}" />
+            </textInputLayout:SfTextInputLayout>
+            <textInputLayout:SfTextInputLayout
+                ContainerType="None"
+                ErrorText="{Binding Usuario.MensajeErrorNick}"
+                HasError="{Binding Usuario.ErrorNick}"
+                HelperText="¿Cual será tu nombre clave?"
+                Hint="Nick"
+                ReserveSpaceForAssistiveLabels="True">
+                <Entry Text="{Binding Usuario.Nick, Mode=TwoWay}" />
+            </textInputLayout:SfTextInputLayout>
+            <textInputLayout:SfTextInputLayout
+                CharMaxLength="8"
+                ContainerType="None"
+                EnablePasswordVisibilityToggle="True"
+                ErrorText="{Binding Usuario.MensajeErrorPass}"
+                HasError="{Binding Usuario.ErrorPass}"
+                HelperText="Captura tu contraseña"
+                Hint="Contraseña"
+                ReserveSpaceForAssistiveLabels="True"
+                ShowCharCount="true">
+                <Entry Text="{Binding Usuario.Pass, Mode=TwoWay}" />
+            </textInputLayout:SfTextInputLayout>
+            <autocomplete:SfAutoComplete
+                AutoCompleteMode="Suggest"
+                ClearButtonColor="Black"
+                DataSource="{Binding ListaEstados}"
+                DisplayMemberPath="Nombre"
+                DropDownItemHeight="35"
+                HeightRequest="45"
+                HighlightedTextColor="Red"
+                IsFocused="True"
+                MaximumDropDownHeight="150"
+                MinimumPrefixCharacters="1"
+                NoResultsFoundText="Sin coincidencias"
+                PopupDelay="0"
+                SelectedItem="{Binding Usuario.Estado}"
+                ShowClearButton="True"
+                SuggestionMode="Contains"
+                Text="{Binding Usuario.Estado, Mode=TwoWay}"
+                TextColor="Black"
+                TextHighlightMode="FirstOccurrence"
+                TextSize="16"
+                Watermark="Buscar estado..."
+                WatermarkColor="#adb2bb" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70*" />
+                    <ColumnDefinition Width="30*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <textInputLayout:SfTextInputLayout
+                    Grid.Column="0"
+                    ContainerType="None"
+                    ErrorText="{Binding MensajeErrorHobbie}"
+                    HasError="{Binding ErrorHobbie}"
+                    HelperText="Captura un hobbie"
+                    Hint="Este es uno de mis hobbies"
+                    ReserveSpaceForAssistiveLabels="True">
+                    <Entry Text="{Binding NuevoHobbie, Mode=TwoWay}" />
+                </textInputLayout:SfTextInputLayout>
+                <buttons:SfButton
+                    Grid.Column="1"
+                    Command="{Binding AgregarHobbieCommand}"
+                    Text="Agregar" />
+            </Grid>
+            <buttons:SfChipGroup DisplayMemberPath="Nombre" ItemsSource="{Binding Usuario.Hobbies}">
+                <buttons:SfChipGroup.ChipLayout>
+                    <FlexLayout
+                        AlignContent="Start"
+                        AlignItems="Start"
+                        Direction="Row"
+                        HorizontalOptions="Start"
+                        JustifyContent="Start"
+                        VerticalOptions="Center"
+                        Wrap="Wrap" />
+                </buttons:SfChipGroup.ChipLayout>
+            </buttons:SfChipGroup>
+            <popupLayout:SfPopupLayout IsOpen="{Binding IsSuccess}">
+                <popupLayout:SfPopupLayout.PopupView>
+                    <popupLayout:PopupView
+                        AnimationMode="Zoom"
+                        AutoSizeMode="Height"
+                        ShowFooter="False"
+                        ShowHeader="False">
+                        <popupLayout:PopupView.ContentTemplate>
+                            <DataTemplate>
+                                <Label
+                                    Padding="15"
+                                    BackgroundColor="White"
+                                    HorizontalOptions="FillAndExpand"
+                                    Text="Los datos fueron registrados con éxito" />
+                            </DataTemplate>
+                        </popupLayout:PopupView.ContentTemplate>
+                    </popupLayout:PopupView>
+                </popupLayout:SfPopupLayout.PopupView>
+            </popupLayout:SfPopupLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

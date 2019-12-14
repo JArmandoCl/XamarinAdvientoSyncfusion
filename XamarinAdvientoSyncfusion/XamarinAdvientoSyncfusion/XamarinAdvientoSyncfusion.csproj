@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="17.3.0.34" />
+    <PackageReference Include="Syncfusion.Xamarin.SfAutoComplete" Version="17.3.0.34" />
+    <PackageReference Include="Syncfusion.Xamarin.SfBusyIndicator" Version="17.3.0.34" />
+    <PackageReference Include="Syncfusion.Xamarin.SfPopupLayout" Version="17.3.0.34" />
+    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991265" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Syncfusion.Expander.XForms">
+      <HintPath>..\..\..\Users\arman\.nuget\packages\syncfusion.xamarin.expander\17.3.0.34\lib\MonoAndroid10\Syncfusion.Expander.XForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfBusyIndicator.XForms">
+      <HintPath>..\..\..\Users\arman\.nuget\packages\syncfusion.xamarin.sfbusyindicator\17.3.0.34\lib\MonoAndroid10\Syncfusion.SfBusyIndicator.XForms.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+  </ItemGroup>
+</Project>
